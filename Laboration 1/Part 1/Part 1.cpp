@@ -1,21 +1,60 @@
-// Part 1.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
-
 #include "pch.h"
+#include "LinkedList.h"
+#include "StudentDatabase.h"
 #include <iostream>
+#include <string>
+
+namespace {
+	using std::cout;
+	using std::cin;
+	using std::endl;
+	using std::getline;
+	using std::string;
+}
 
 int main()
 {
-    std::cout << "Hello World!\n"; 
+	//StudentDatabase sdb;
+
+	LinkedList<Student> studentDB;
+	string input;
+
+	do
+	{
+		cout << "1. Add student" << endl;
+		cout << "2. Remove student" << endl;
+		cout << "3. Attach course to student" << endl;
+		cout << "4. Detach course from student" << endl;
+		cout << "5. Exit";
+
+		getline(cin, input);
+
+		switch (input[0])
+		{
+		case 1:
+			// add student
+			getline(cin, input);
+			//sdb.addStudent(input);
+			break;
+		case 2:
+			// remove student;
+			//sdb.printStudents();
+			getline(cin, input);
+			//sdb.removeStudent(input[0]);
+			break;
+		case 3:
+			// add student course
+			//sdb.printStudents();
+			getline(cin, input);
+			//sbd.attachStudentCourse(input[0]);
+			break;
+		case 4:
+			// remove student course
+			//sdb.printStudents();
+			getline(cin, input);
+			//sdb.detachStudentCourse(input[0]);
+		default:
+			break;
+		}
+	} while (input[0] != 5);
 }
-
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
-
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file

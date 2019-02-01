@@ -151,7 +151,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Course.h" />
+    <ClInclude Include="LinkedList.h" />
+    <ClInclude Include="Node.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="Student.h" />
+    <ClInclude Include="StudentDatabase.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Part 1.cpp" />
