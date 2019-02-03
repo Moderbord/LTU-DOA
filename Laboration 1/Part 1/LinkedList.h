@@ -26,7 +26,6 @@ public:
 			node->setNext(head);					// New Node references previous head
 		}
 		head = node;								// Updates head to new Node
-		cout << "Added " << head->getData() << "\n";
 	}
 
 	Node<T>* get(int i)

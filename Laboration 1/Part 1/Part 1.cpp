@@ -19,28 +19,28 @@ int main()
 
 	LinkedList<Student> studentRecord;
 
-	Student studentOne("Per Olof");
-	Student studentTwo("Berit");
-	Student studentThree("Bengt Gunnar");
-	Student studentFour("Gunn Marie Eriksson");
-	Student studentFive("Sverker Einar Larsson");
+	//Student studentOne("Per Olof");
+	//Student studentTwo("Berit");
+	//Student studentThree("Bengt Gunnar");
+	//Student studentFour("Gunn Marie Eriksson");
+	//Student studentFive("Sverker Einar Larsson");
 
-	Node<Student> *nodeOne = new Node<Student>();
-	nodeOne->setData(studentOne);
-	Node<Student> *nodeTwo = new Node<Student>();
-	nodeTwo->setData(studentTwo);
-	Node<Student> *nodeThree = new Node<Student>();
-	nodeThree->setData(studentThree);
-	Node<Student> *nodeFour = new Node<Student>();
-	nodeFour->setData(studentFour);
-	Node<Student> *nodeFive = new Node<Student>();
-	nodeFive->setData(studentFive);
+	//Node<Student> *nodeOne = new Node<Student>();
+	//nodeOne->setData(studentOne);
+	//Node<Student> *nodeTwo = new Node<Student>();
+	//nodeTwo->setData(studentTwo);
+	//Node<Student> *nodeThree = new Node<Student>();
+	//nodeThree->setData(studentThree);
+	//Node<Student> *nodeFour = new Node<Student>();
+	//nodeFour->setData(studentFour);
+	//Node<Student> *nodeFive = new Node<Student>();
+	//nodeFive->setData(studentFive);
 
-	studentRecord.insert(nodeOne);
-	studentRecord.insert(nodeTwo);
-	studentRecord.insert(nodeThree);
-	studentRecord.insert(nodeFour);
-	studentRecord.insert(nodeFive);
+	//studentRecord.insert(nodeOne);
+	//studentRecord.insert(nodeTwo);
+	//studentRecord.insert(nodeThree);
+	//studentRecord.insert(nodeFour);
+	//studentRecord.insert(nodeFive);
 
 	do
 	{
@@ -60,10 +60,12 @@ int main()
 			cout << "\nStudent name: ";
 			getline(cin, input);
 			{
-				Student newStudent(input);
 				Node<Student> *newNode = new Node<Student>();
+				Student newStudent(input);
 				newNode->setData(newStudent);
 				studentRecord.insert(newNode);
+
+				cout << "Added " << newStudent.getName() << "\n\n";
 			}
 			break;
 
@@ -104,6 +106,9 @@ int main()
 				cout << "Name of course: ";
 				getline(cin, input);
 				newCourse.setName(input);
+				cout << "Course credits: ";
+				getline(cin, input);
+				newCourse.setCredits(input);
 				cout << "Student grade: ";
 				getline(cin, input);
 				newCourse.setGrade(input);
@@ -111,9 +116,7 @@ int main()
 				courseNode->setData(newCourse);
 				student.getCourseList().insert(courseNode);
 
-				cout << "\n--- Summary ---";
-				cout << "\nStudent: " << student.getName();
-				cout << "\n" << newCourse << "\n\n";
+				cout << "\nCourse added\n\n";
 			}
 			break;
 
