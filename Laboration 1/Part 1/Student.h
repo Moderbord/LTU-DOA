@@ -10,18 +10,26 @@ private:
 	std::string name;
 	LinkedList<Course> courses;
 public:
-	Student(std::string name)
+	Student() {};
+	Student(const std::string name)
 	{
 		this->name = name;
 	}
-	LinkedList<Course> getCourses()
+	std::string getName()
+	{
+		return this->name;
+	}
+	LinkedList<Course> getCourseList()
 	{
 		return this->courses;
 	}
-	friend std::ostream& operator<<(std::ostream& os, const Student& st)
+	friend std::ostream& operator<< (std::ostream& stream, const Student& student)
 	{
-		os << "Student name: " << st.name << endl;
-		
-		return os;
+		std::cout << student.name;
+		return stream;
+	}
+	void displayCourses()
+	{
+		this->courses.display();
 	}
 };

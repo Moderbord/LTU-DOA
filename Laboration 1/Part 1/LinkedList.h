@@ -26,58 +26,62 @@ public:
 			node->setNext(head);					// New Node references previous head
 		}
 		head = node;								// Updates head to new Node
+		cout << "Added " << head->getData() << "\n";
 	}
 
-	Node<T>* search(T value)
+	Node<T>* get(int i)
 	{
 		Node<T> *current = head;
 
-		while (current != nullptr) {
-
-			if (current->getData() == value)		// Node data matches search value
-			{
-				return current;						// Returns Node
-			}
+		while (current->getNext() != nullptr && i > 1)
+		{
 			current = current->getNext();
+			i--;
 		}
-		// Returns NULL 
+		return current;
 	}
 
 	void remove(int i)
 	{
-		Node<T> *shiftNode = new Node<T>();
-		this->insert(shiftNode);					// Inserts temporary Node at head
+		Node<T> *bridge = head;
+		Node<T> *toRemove = new Node<T>();
+		toRemove = head;
 
-		Node<T> *current = head;					// 'current' starts at head (shiftNode)
-
-		for (int j = 1; j < i; j++)					// Traverses LinkedList prior to Node 'i'
+		if (i == 1)
 		{
-			if (current->getNext() == nullptr)		// Node out of range
-			{
-				return;
-			}
-			current = current->getNext();			// 'current' becomes Node prior to the Node beeing removed
+			head = head->getNext();
+			cout << "Removed " << toRemove->getData() << "\n\n";
+			delete toRemove;
+			return;
 		}
 
-		head = shiftNode->getNext();				// Cuts the temporary head from Linkedlist
+		while (toRemove->getNext() != nullptr && i > 1)
+		{
+			bridge = toRemove;
+			toRemove = toRemove->getNext();
+			i--;
+		}
 
-		shiftNode->setNext(current->getNext());		// Temp Node stores reference to Node that's beeing removed
-
-		current->setNext(current->getNext()->getNext());	// Bridges current Node over the one beeing removed
-
-		delete shiftNode->getNext();				// Deletes Node
-		delete shiftNode;							// Deletes temporary Node
+		bridge->setNext(toRemove->getNext());
+		cout << "Removed " << toRemove->getData() << "\n\n";
+		delete toRemove;
 	}
 
 	void display()
 	{
-		Node<T> *current = head;
+		Node<T> *current = this->head;
 
-		while (current != nullptr) {				// Traverses Nodes in LinkedList up to nullptr
-			cout << current->getData() << " ";
+		int i = 1;
+		while (current != nullptr) {
+			cout << i << ": " << current->getData() << endl;
 			current = current->getNext();
+			i++;
 		}
-		cout << endl;
+	}
+
+	bool isEmpty()
+	{
+		return this->head == nullptr ? true : false;
 	}
 
 };
