@@ -10,6 +10,7 @@ private:
 	std::string name;
 	LinkedList<Course> courses;
 public:
+	~Student() {}
 	Student() {};
 	Student(const std::string name)
 	{
@@ -19,7 +20,7 @@ public:
 	{
 		return this->name;
 	}
-	LinkedList<Course> getCourseList()
+	LinkedList<Course>& getCourseList()
 	{
 		return this->courses;
 	}
@@ -28,9 +29,9 @@ public:
 		std::cout << "\t" << student->name;
 		return stream;
 	}
-	void attachCourse(Node<Course> *course)
+	void removeCourse(int i)
 	{
-		this->courses.insert(course);
+		this->courses.remove(i);
 	}
 	void displayCourses()
 	{

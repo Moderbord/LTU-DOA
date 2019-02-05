@@ -14,6 +14,16 @@ private:
 	Node<T> *head;
 
 public:
+	~LinkedList()
+	{
+		Node<T> *current = head;
+		while (head != nullptr)
+		{
+			current = current->getNext();
+			delete head;
+			head = current;
+		}
+	}
 	LinkedList()
 	{
 		head = nullptr;
@@ -49,7 +59,6 @@ public:
 		if (i == 1)
 		{
 			head = head->getNext();
-			cout << "Removed " << toRemove->getData() << "\n\n";
 			delete toRemove;
 			return;
 		}
@@ -62,7 +71,6 @@ public:
 		}
 
 		bridge->setNext(toRemove->getNext());
-		cout << "Removed " << toRemove->getData() << "\n\n";
 		delete toRemove;
 	}
 

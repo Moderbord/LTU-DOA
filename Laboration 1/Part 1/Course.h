@@ -9,16 +9,8 @@ private:
 	std::string credits;
 	std::string grade;
 public:
+	~Course() {}
 	Course() {};
-	Course(std::string name)
-	{
-		this->name = name;
-	}
-	Course(std::string name, std::string grade)
-	{
-		this->name = name;
-		this->grade = grade;
-	}
 	std::string getName()
 	{
 		return this->name;

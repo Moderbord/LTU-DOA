@@ -9,6 +9,10 @@ private:
 	Node* next;
 
 public:
+	~Node()
+	{
+		delete data;
+	}
 	Node()
 	{
 		next = nullptr;
