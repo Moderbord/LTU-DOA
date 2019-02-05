@@ -5,7 +5,7 @@ class Node
 {
 
 private:
-	T data;
+	T* data;
 	Node* next;
 
 public:
@@ -14,12 +14,12 @@ public:
 		next = nullptr;
 	};
 
-	T getData()
+	T* getData()
 	{
 		return this->data;
 	};
 
-	void setData(T data)
+	void setData(T* data)
 	{
 		this->data = data;
 	};

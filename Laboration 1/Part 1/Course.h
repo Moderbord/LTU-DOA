@@ -43,11 +43,11 @@ public:
 	{
 		this->grade = grade;
 	}
-	friend std::ostream& operator<< (std::ostream& stream, const Course& course)
+	friend std::ostream& operator<< (std::ostream& stream, Course* course)
 	{
-		std::cout << "Course name: " << course.name << endl;
-		std::cout << "Course credits: " << course.credits << endl;
-		std::cout << "Student grade: " << course.grade;
+		std::cout << "\tCourse name: " << course->name << std::endl;
+		std::cout << "\tCourse credits: " << course->credits << std::endl;
+		std::cout << "\tStudent grade: " << course->grade << std::endl;
 		return stream;
 	}
 };

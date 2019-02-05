@@ -72,7 +72,7 @@ public:
 
 		int i = 1;
 		while (current != nullptr) {
-			cout << i << ": " << current->getData() << endl;
+			cout << i << ":" << current->getData() << endl;
 			current = current->getNext();
 			i++;
 		}

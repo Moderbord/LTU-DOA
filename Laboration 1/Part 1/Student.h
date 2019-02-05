@@ -15,7 +15,7 @@ public:
 	{
 		this->name = name;
 	}
-	std::string getName()
+	std::string& getName()
 	{
 		return this->name;
 	}
@@ -23,10 +23,14 @@ public:
 	{
 		return this->courses;
 	}
-	friend std::ostream& operator<< (std::ostream& stream, const Student& student)
+	friend std::ostream& operator<< (std::ostream& stream, Student* student)
 	{
-		std::cout << student.name;
+		std::cout << "\t" << student->name;
 		return stream;
+	}
+	void attachCourse(Node<Course> *course)
+	{
+		this->courses.insert(course);
 	}
 	void displayCourses()
 	{

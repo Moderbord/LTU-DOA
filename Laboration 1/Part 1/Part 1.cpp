@@ -14,33 +14,9 @@ namespace {
 
 int main()
 {
-
 	string input;
 
 	LinkedList<Student> studentRecord;
-
-	//Student studentOne("Per Olof");
-	//Student studentTwo("Berit");
-	//Student studentThree("Bengt Gunnar");
-	//Student studentFour("Gunn Marie Eriksson");
-	//Student studentFive("Sverker Einar Larsson");
-
-	//Node<Student> *nodeOne = new Node<Student>();
-	//nodeOne->setData(studentOne);
-	//Node<Student> *nodeTwo = new Node<Student>();
-	//nodeTwo->setData(studentTwo);
-	//Node<Student> *nodeThree = new Node<Student>();
-	//nodeThree->setData(studentThree);
-	//Node<Student> *nodeFour = new Node<Student>();
-	//nodeFour->setData(studentFour);
-	//Node<Student> *nodeFive = new Node<Student>();
-	//nodeFive->setData(studentFive);
-
-	//studentRecord.insert(nodeOne);
-	//studentRecord.insert(nodeTwo);
-	//studentRecord.insert(nodeThree);
-	//studentRecord.insert(nodeFour);
-	//studentRecord.insert(nodeFive);
 
 	do
 	{
@@ -56,16 +32,17 @@ int main()
 		switch (input[0])
 		{
 		case '1':	// Add student
-
-			cout << "\nStudent name: ";
-			getline(cin, input);
 			{
+				cout << "\nStudent name: ";
+				getline(cin, input);
+
 				Node<Student> *newNode = new Node<Student>();
-				Student newStudent(input);
+				Student *newStudent = new Student(input);
+
 				newNode->setData(newStudent);
 				studentRecord.insert(newNode);
 
-				cout << "Added " << newStudent.getName() << "\n\n";
+				cout << "Added " << newStudent->getName() << "\n\n";
 			}
 			break;
 
@@ -73,10 +50,10 @@ int main()
 
 			if (studentRecord.isEmpty())
 			{
-				cout << "\nNo registered students\n" << endl;
+				cout << "\nNo registered students\n\n";
 				break;
 			}
-			cout << endl << "--- CURRENT STUDENTS ---" << endl;
+			cout << endl << "--- CURRENT STUDENTS ---\n";
 			studentRecord.display();
 			cout << "\nSelect student: ";
 
@@ -91,30 +68,33 @@ int main()
 				cout << "\nNo registered students\n" << endl;
 				break;
 			}
-			cout << endl << "--- CURRENT STUDENTS ---" << endl;
+			cout << "\n--- CURRENT STUDENTS ---\n";
 			studentRecord.display();
 			cout << "\nSelect student: ";
 
 			getline(cin, input);
 			{
 				Node<Student> *studentNode = studentRecord.get(input[0] - '0');
-				Student student = (Student)studentNode->getData();
+				Student *student = studentNode->getData();
 				Node<Course> *courseNode = new Node<Course>();
-				Course newCourse;
+				Course *newCourse = new Course();
 
-				cout << "\nSelected student: " << student.getName() << endl;
+				cout << "\nSelected student: " << student->getName() << endl;
+				cout << "\n--- CURRENT COURSES ---\n\n";
+				student->getCourseList().display();
+
 				cout << "Name of course: ";
 				getline(cin, input);
-				newCourse.setName(input);
+				newCourse->setName(input);
 				cout << "Course credits: ";
 				getline(cin, input);
-				newCourse.setCredits(input);
+				newCourse->setCredits(input);
 				cout << "Student grade: ";
 				getline(cin, input);
-				newCourse.setGrade(input);
+				newCourse->setGrade(input);
 
 				courseNode->setData(newCourse);
-				student.getCourseList().insert(courseNode);
+				student->attachCourse(courseNode);
 
 				cout << "\nCourse added\n\n";
 			}
