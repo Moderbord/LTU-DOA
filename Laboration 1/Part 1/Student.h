@@ -24,11 +24,6 @@ public:
 	{
 		return this->courses;
 	}
-	friend std::ostream& operator<< (std::ostream& stream, Student* student)
-	{
-		std::cout << "\t" << student->name;
-		return stream;
-	}
 	void removeCourse(int i)
 	{
 		this->courses.remove(i);
@@ -36,5 +31,10 @@ public:
 	void displayCourses()
 	{
 		this->courses.display();
+	}
+	friend std::ostream& operator<< (std::ostream& stream, Student* student)	// Overrides the std::cout when printing out class object
+	{
+		std::cout << "\t" << student->name;
+		return stream;
 	}
 };

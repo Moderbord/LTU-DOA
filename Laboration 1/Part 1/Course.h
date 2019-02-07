@@ -35,7 +35,7 @@ public:
 	{
 		this->grade = grade;
 	}
-	friend std::ostream& operator<< (std::ostream& stream, Course* course)
+	friend std::ostream& operator<< (std::ostream& stream, Course* course)	// Overrides the std::cout when printing out class object
 	{
 		std::cout << "\tCourse name: " << course->name << std::endl;
 		std::cout << "\tCourse credits: " << course->credits << std::endl;
