@@ -3,7 +3,6 @@
 #include "Student.h"
 #include <iostream>
 #include <string>
-#include <time.h>
 
 namespace {
 	using std::cout;

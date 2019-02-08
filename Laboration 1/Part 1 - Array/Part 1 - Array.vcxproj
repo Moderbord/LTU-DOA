@@ -20,9 +20,9 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{5E8C4810-5AC4-4E8B-83A9-6B9D8D6E7DC6}</ProjectGuid>
+    <ProjectGuid>{A49D843E-0DE0-4930-81F5-B83DF403B748}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>PainInTheAss</RootNamespace>
+    <RootNamespace>Part1Array</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -151,13 +151,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Array.h" />
     <ClInclude Include="Course.h" />
-    <ClInclude Include="CustomArray.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Student.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="PainInTheAss.cpp" />
+    <ClCompile Include="Part 1 - Array.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

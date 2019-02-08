@@ -18,20 +18,17 @@
     <ClInclude Include="pch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Course.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="LinkedList.h">
-      <Filter>Source Files</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Node.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="StudentDatabase.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Course.h">
-      <Filter>Source Files</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Student.h">
-      <Filter>Source Files</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

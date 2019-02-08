@@ -64,7 +64,7 @@ public:
 
 	// Retrieving a *Node<T> from the LinkedList may require us to traverse
 	// the whole list. This makes this equal to O(n) number of operations
-	// in 'Big Oh' notation.
+	// with 'Big Oh' notation.
 	Node<T>* get(int i)								
 	{												
 		clock_t begin = clock();																	// Time start
@@ -90,7 +90,7 @@ public:
 	// can be written as O(n) when 'i' points to the last object 'n' in the LinkedList
 	void remove(int i)								
 	{						
-		clock_t begin = clock();																		// Time start
+		clock_t begin = clock();																	// Time start
 		
 		Node<T> *bridge = head;						
 		Node<T> *toRemove = new Node<T>();			

@@ -18,10 +18,10 @@
     <ClInclude Include="pch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Student.h">
+    <ClInclude Include="Array.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CustomArray.h">
+    <ClInclude Include="Student.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Course.h">
@@ -32,7 +32,7 @@
     <ClCompile Include="pch.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="PainInTheAss.cpp">
+    <ClCompile Include="Part 1 - Array.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
