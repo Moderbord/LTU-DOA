@@ -18,24 +18,6 @@ int main()
 	Array<Student> studentRecord;
 
 
-
-	//for (int i = 11; i > 0; i--)										// Creates 10 students and inserts them into the record
-	//{
-	//	studentRecord.insertSkipMeasure(newNode);
-
-	//	for (int j = 1; j < 1001; j++)									// Adds 1000 courses to each students
-	//	{
-
-	//		string s = std::to_string(j);
-	//		newCourse->setName(s);
-	//		newCourse->setCredits(s);
-	//		newCourse->setGrade(s);
-
-	//		courseNode->setData(newCourse);
-	//		newStudent->getCourseList().insertSkipMeasure(courseNode);
-	//	}
-	//}
-
 	string input;
 	int n;
 
@@ -68,18 +50,18 @@ int main()
 
 		case '2':	/// Remove student
 		{
-			//if (studentRecord.isEmpty())										// Checks if the record is empty before fetching any data
-			//{
-			//	cout << "\nNo registered students\n\n";
-			//	break;
-			//}
+			if (studentRecord.isEmpty())										// Checks if the record is empty before fetching any data
+			{
+				cout << "\nNo registered students\n\n";
+				break;
+			}
 			cout << endl << "--- CURRENT STUDENTS ---\n";
-			//	studentRecord.display();											// Displays current students (takes long time on large sets)
+			studentRecord.display();											// Displays current students (takes long time on large sets)
 			cout << "\nSelect student: ";
 
 			cin >> n;															// Reads input
 			cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');		// Ignores excess '\n' (enter) characters
-			//studentRecord.remove(n);											// Removes corresponding *Node containing the student via index		
+			studentRecord.remove(n);											// Removes corresponding *Node containing the student via index		
 
 			cout << "\nStudent removed\n\n";
 		}
@@ -87,33 +69,39 @@ int main()
 
 		case '3':	/// Add course
 		{
-			//if (studentRecord.isEmpty())										// Checks if the record is empty before fetching any data
-			//{
-			//	cout << "\nNo registered students\n" << endl;
-			//	break;
-			//}
+			if (studentRecord.isEmpty())										// Checks if the record is empty before fetching any data
+			{
+				cout << "\nNo registered students\n" << endl;
+				break;
+			}
 
 			cout << "\n--- CURRENT STUDENTS ---\n";
-			//studentRecord.display();											// Displays current students (takes long time on large sets)
+			studentRecord.display();											// Displays current students (takes long time on large sets)
 			cout << "\nSelect student: ";
 			cin >> n;															// Reads index from printed students
 			cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');		// Ignores excess '\n' (enter) characters
 
-			//cout << "\nSelected student: " << student->getName() << endl;
+			Student *student = &studentRecord.get(n);
+
+			cout << "\nSelected student: " << student->getName() << endl;
 			cout << "\n--- CURRENT COURSES ---\n\n";
-			//student->getCourseList().display();								// Displays courses attached to student (Takes long time on large sets)
+			student->getCourseList().display();									// Displays courses attached to student (Takes long time on large sets)
+
+			Course newCourse;
+
 			cout << "Name of course: ";
-
 			getline(cin, input);												// Reads and sets name of course
-			//newCourse->setName(input);
+			newCourse.setName(input);
+
 			cout << "Course credits: ";
-
 			getline(cin, input);												// Reads and sets credits of course
-			//newCourse->setCredits(input);
-			cout << "Student grade: ";
+			newCourse.setCredits(input);
 
+			cout << "Student grade: ";
 			getline(cin, input);												// Reads and sets grade of course
-			//newCourse->setGrade(input);
+			newCourse.setGrade(input);
+
+			student->getCourseList().insert(newCourse);
 
 			cout << "\nCourse added\n\n";
 		}
@@ -121,32 +109,34 @@ int main()
 
 		case '4':	/// Remove course
 		{
-			//if (studentRecord.isEmpty())										// Checks if the record is empty before fetching any data
-			//{
-			//	cout << "\nNo registered students\n" << endl;
-			//	break;
-			//}
+			if (studentRecord.isEmpty())										// Checks if the record is empty before fetching any data
+			{
+				cout << "\nNo registered students\n" << endl;
+				break;
+			}
 
 			cout << "\n--- CURRENT STUDENTS ---\n";
-			//studentRecord.display();											// Displays current students (takes long time on large sets)
+			studentRecord.display();											// Displays current students (takes long time on large sets)
 			cout << "\nSelect student: ";
 			cin >> n;															// Reads index from printed students
 			cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');		// Ignores excess '\n' (enter) characters
 
-			//if (student->getCourseList().isEmpty())								// Checks if the students course list is empty
-			//{
-			//	cout << "\nNo registered courses\n" << endl;
-			//	break;
-			//}
+			Student *student = &studentRecord.get(n);
 
-			//cout << "\nSelected student: " << student->getName() << endl;
+			if (student->getCourseList().isEmpty())								// Checks if the students course list is empty
+			{
+				cout << "\nNo registered courses\n" << endl;
+				break;
+			}
+
+			cout << "\nSelected student: " << student->getName() << endl;
 			cout << "\n--- CURRENT COURSES ---\n\n";
-			//student->getCourseList().display();								// Displays current courses the student have(Takes long time on large sets)
+			student->getCourseList().display();									// Displays current courses the student have(Takes long time on large sets)
 			cout << "\nSelect course: ";
 
 			cin >> n;															// Reads index from printed students
 			cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');		// Ignores excess '\n' (enter) characters
-			//student->removeCourse(n);											// Removes corresponding course node from course list with index
+			student->removeCourse(n);											// Removes corresponding course node from course list with index
 
 			cout << "\nCourse removed\n\n";
 		}

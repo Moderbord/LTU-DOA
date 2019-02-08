@@ -8,7 +8,7 @@ class Student
 {
 private:
 	std::string name;
-	//Array<Course> courses;
+	Array<Course> courses;
 public:
 	~Student() {}
 	Student() {};
@@ -16,25 +16,25 @@ public:
 	{
 		this->name = name;
 	}
-	std::string& getName()
+	std::string getName()
 	{
 		return this->name;
 	}
-	//Array<Course>& getCourseList()
-	//{
-	//	return this->courses;
-	//}
-	//void removeCourse(int i)
-	//{
-	//	this->courses.remove(i);
-	//}
-	//void displayCourses()
-	//{
-	//	this->courses.display();
-	//}
-	friend std::ostream& operator<< (std::ostream& stream, Student* student)	// Overrides the std::cout when printing out class object
+	Array<Course>& getCourseList()
 	{
-		std::cout << "\t" << student->name;
+		return this->courses;
+	}
+	void removeCourse(int i)
+	{
+		this->courses.remove(i);
+	}
+	void displayCourses()
+	{
+		this->courses.display();
+	}
+	friend std::ostream& operator<< (std::ostream& stream, const Student& student)	// Overrides the std::cout when printing out class object
+	{
+		std::cout << "\t" << student.name;
 		return stream;
 	}
 };

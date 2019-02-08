@@ -5,64 +5,53 @@
 template <typename T>
 class Array
 {
-private:
-	T *arr;
-	int size;
-
 public:
-	~Array()
-	{
-		delete[] arr;
-	}
+	T *data;
+	int size;
 
 	Array()
 	{
-		arr = new T[0];
+		data = new T[0];
 		size = 0;
-	};
+	}
 
-	void insert(T item)
+	void insert(T &s)
 	{
-		T *newArr = new T[size + 1];
-		std::memcpy(newArr, arr, sizeof(T)*size);
-		delete[] arr;
-		arr = newArr;
-
-		std::cout << sizeof(T);
-
-		arr[size] = (T)item;
+		T *newData = new T[size + 1];
+		std::copy_n(data, size, newData);
+		delete[] data;
+		data = newData;
+		data[size] = (T)s;
 		size++;
-		return;
+	}
+
+	T& get(int i)
+	{
+		return data[i - 1];
 	}
 
 	void remove(int i)
 	{
 		size--;
+		data[i - 1] = data[size];
 
-		if (size != 0)
-		{
-			arr[i - 1] = arr[size];
-		}
-
-		T *newArr = new T[size];
-		std::memcpy(newArr, arr, sizeof(T)*size);
-		delete[] arr;
-		arr = newArr;
-
-		return;
+		T *newData = new T[size];
+		std::copy_n(data, size, newData);
+		delete[] data;
+		data = newData;
 	}
 
 	void display()
 	{
-		if (size < 1)
-		{
-			std::cout << "Array contains no values" << std::endl;
-			return;
-		}
-
 		for (int i = 0; i < size; i++)
 		{
-			std::cout << std::to_string(i + 1) << ":" << &arr[i] << std::endl;
+			std::cout << (T)data[i] << std::endl;
 		}
 	}
+
+	bool isEmpty()
+	{
+		return size == 0 ? true : false;
+	}
+
 };
