@@ -10,7 +10,10 @@ private:
 	std::string name;
 	Array<Course> courses;
 public:
-	~Student() {}
+	~Student()
+	{
+		
+	}
 	Student() {};
 	Student(const std::string name)
 	{

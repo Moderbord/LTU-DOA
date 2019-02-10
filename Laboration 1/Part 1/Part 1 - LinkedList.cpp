@@ -24,7 +24,7 @@ int main()
 		newNode->setData(newStudent);
 		studentRecord.insertSkipMeasure(newNode);
 
-		for (int j = 1; j < 1001; j++)									// Adds 1000 courses to each students
+		for (int j = 1; j < 11; j++)									// Adds 10 courses to each students
 		{
 			Node<Course> *courseNode = new Node<Course>();
 			Course *newCourse = new Course();
@@ -58,7 +58,7 @@ int main()
 		case '1':	/// Add student
 		{
 			cout << endl << "--- CURRENT STUDENTS ---\n";
-			//studentRecord.display();								// Print current students(takes long time on large sets)
+			studentRecord.display();								// Print current students(takes long time on large sets)
 			cout << "\nStudent name: ";
 			getline(cin, input);									// Ask for new student name
 
@@ -80,7 +80,7 @@ int main()
 				break;
 			}
 			cout << endl << "--- CURRENT STUDENTS ---\n";
-		//	studentRecord.display();											// Displays current students (takes long time on large sets)
+			studentRecord.display();											// Displays current students (takes long time on large sets)
 			cout << "\nSelect student: ";
 
 			cin >> n;															// Reads input
@@ -100,7 +100,7 @@ int main()
 			}
 
 			cout << "\n--- CURRENT STUDENTS ---\n";
-			//studentRecord.display();											// Displays current students (takes long time on large sets)
+			studentRecord.display();											// Displays current students (takes long time on large sets)
 			cout << "\nSelect student: ";
 			cin >> n;															// Reads index from printed students
 			cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');		// Ignores excess '\n' (enter) characters
@@ -112,7 +112,7 @@ int main()
 
 			cout << "\nSelected student: " << student->getName() << endl;
 			cout << "\n--- CURRENT COURSES ---\n\n";
-			//student->getCourseList().display();								// Displays courses attached to student (Takes long time on large sets)
+			student->getCourseList().display();									// Displays courses attached to student (Takes long time on large sets)
 			cout << "Name of course: ";
 
 			getline(cin, input);												// Reads and sets name of course
@@ -142,7 +142,7 @@ int main()
 			}
 
 			cout << "\n--- CURRENT STUDENTS ---\n";
-			//studentRecord.display();											// Displays current students (takes long time on large sets)
+			studentRecord.display();											// Displays current students (takes long time on large sets)
 			cout << "\nSelect student: ";
 			cin >> n;															// Reads index from printed students
 			cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');		// Ignores excess '\n' (enter) characters
@@ -158,7 +158,7 @@ int main()
 
 			cout << "\nSelected student: " << student->getName() << endl;
 			cout << "\n--- CURRENT COURSES ---\n\n";
-			//student->getCourseList().display();								// Displays current courses the student have(Takes long time on large sets)
+			student->getCourseList().display();								// Displays current courses the student have(Takes long time on large sets)
 			cout << "\nSelect course: ";
 
 			cin >> n;															// Reads index from printed students

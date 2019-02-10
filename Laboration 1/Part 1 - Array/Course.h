@@ -9,7 +9,10 @@ private:
 	std::string credits;
 	std::string grade;
 public:
-	~Course() {}
+	~Course()
+	{
+	
+	}
 	Course() {};
 	std::string getName()
 	{
