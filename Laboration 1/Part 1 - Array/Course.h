@@ -9,7 +9,10 @@ private:
 	std::string credits;
 	std::string grade;
 public:
-	~Course() {}
+	~Course()
+	{
+	
+	}
 	Course() {};
 	std::string getName()
 	{
@@ -35,11 +38,11 @@ public:
 	{
 		this->grade = grade;
 	}
-	friend std::ostream& operator<< (std::ostream& stream, Course* course)	// Overrides the std::cout when printing out class object
+	friend std::ostream& operator<< (std::ostream& stream, const Course& course)	// Overrides the std::cout when printing out class object
 	{
-		std::cout << "\tCourse name: " << course->name << std::endl;
-		std::cout << "\tCourse credits: " << course->credits << std::endl;
-		std::cout << "\tStudent grade: " << course->grade << std::endl;
+		std::cout << "\tCourse name: " << course.name << std::endl;
+		std::cout << "\tCourse credits: " << course.credits << std::endl;
+		std::cout << "\tStudent grade: " << course.grade << std::endl;
 		return stream;
 	}
 };
