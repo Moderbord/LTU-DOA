@@ -16,22 +16,22 @@ int main()
 {
 	Array<Student> studentRecord;
 
-	for (int j = 1; j < 11; j++)										// Loop that creates 10 students with 10 courses each
-	{
-		Student student(std::to_string(j));
-		studentRecord.insertSkipMeasure(student);
+	//for (int j = 1; j < 11; j++)										// Loop that creates 10 students with 10 courses each
+	//{
+	//	Student student(std::to_string(j));
+	//	studentRecord.insertSkipMeasure(student);
 
-		for (int i = 1; i < 11; i++)
-		{
-			Course course;
-			string s = std::to_string(i);
-			course.setName(s);
-			course.setCredits(s);
-			course.setGrade(s);
+	//	for (int i = 1; i < 11; i++)
+	//	{
+	//		Course course;
+	//		string s = std::to_string(i);
+	//		course.setName(s);
+	//		course.setCredits(s);
+	//		course.setGrade(s);
 
-			studentRecord.get(j).getCourseList().insertSkipMeasure(course);
-		}
-	}
+	//		studentRecord.get(j).getCourseList().insertSkipMeasure(course);
+	//	}
+	//}
 
 	string input;
 	int n;
