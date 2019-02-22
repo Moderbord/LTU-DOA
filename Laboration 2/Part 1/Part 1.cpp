@@ -56,10 +56,10 @@ int binary_search(T elements[], const int left_bound, const int right_bound, T t
 }
 
 template <typename T>
-void binary_insertion_sort(T elements[], const int num_elements)
+void binary_insertion_sort(T elements[], const int left_bound, const int right_bound)
 {
 	// Iterates after first element
-	for (int i = 1; i < num_elements; i++)						
+	for (int i = left_bound + 1; i < right_bound; i++)						
 	{
 		// Current element that is being sorted
 		T current = elements[i];									
@@ -67,7 +67,7 @@ void binary_insertion_sort(T elements[], const int num_elements)
 		int pivot = i - 1;
 
 		// Using binary search to find position for insertion
-		int insert_index = binary_search(elements, 0, i, current);
+		int insert_index = binary_search(elements, left_bound, i, current);
 		// If current element is equal or larger than element at that position, it can be inserted after it
 		if (current >= elements[insert_index])
 		{
@@ -75,7 +75,7 @@ void binary_insertion_sort(T elements[], const int num_elements)
 		}
 
 		// Right-shifts elements right of insertion index
-		while (pivot >= insert_index)				
+		while (pivot >= left_bound && pivot >= insert_index)				
 		{
 			elements[pivot + 1] = elements[pivot];
 			pivot--;
@@ -113,7 +113,7 @@ int main()
 	//int values[] = {2, 3, 4, 7, 9, 23, 25, 36, 47, 55, 56, 58, 64, 77, 81};
 	//int values[] = {77, 81, 9, 7, 4, 23, 25, 36, 47, 55, 64, 56, 3, 77, 81, 27};
 	//binary_search(values, 0, 15, 100);
-	insertion_sort(values, 2, 6);
-	//binary_insertion_sort(values, 16);
+	//insertion_sort(values, 2, 6);
+	binary_insertion_sort(values, 2,6);
 	
 }
