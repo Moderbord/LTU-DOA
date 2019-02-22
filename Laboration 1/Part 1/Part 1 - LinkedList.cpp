@@ -16,28 +16,28 @@ int main()
 {
 	LinkedList<Student> studentRecord;									// Main LinkedList object with student records
 
-	for (int i = 11; i > 0; i--)										// Creates 10 students and inserts them into the record
-	{
-		Node<Student> *newNode = new Node<Student>();
-		Student *newStudent = new Student("Student " + std::to_string(i));
+	//for (int i = 11; i > 0; i--)										// Creates 10 students and inserts them into the record
+	//{
+	//	Node<Student> *newNode = new Node<Student>();
+	//	Student *newStudent = new Student("Student " + std::to_string(i));
 
-		newNode->setData(newStudent);
-		studentRecord.insertSkipMeasure(newNode);
+	//	newNode->setData(newStudent);
+	//	studentRecord.insertSkipMeasure(newNode);
 
-		for (int j = 1; j < 11; j++)									// Adds 10 courses to each students
-		{
-			Node<Course> *courseNode = new Node<Course>();
-			Course *newCourse = new Course();
+	//	for (int j = 1; j < 11; j++)									// Adds 10 courses to each students
+	//	{
+	//		Node<Course> *courseNode = new Node<Course>();
+	//		Course *newCourse = new Course();
 
-			string s = std::to_string(j);
-			newCourse->setName(s);
-			newCourse->setCredits(s);
-			newCourse->setGrade(s);
+	//		string s = std::to_string(j);
+	//		newCourse->setName(s);
+	//		newCourse->setCredits(s);
+	//		newCourse->setGrade(s);
 
-			courseNode->setData(newCourse);
-			newStudent->getCourseList().insertSkipMeasure(courseNode);
-		}
-	}
+	//		courseNode->setData(newCourse);
+	//		newStudent->getCourseList().insertSkipMeasure(courseNode);
+	//	}
+	//}
 
 	string input;
 	int n;

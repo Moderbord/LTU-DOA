@@ -1,6 +1,14 @@
 #include "pch.h"
 #include <iostream>
 #include <algorithm>
+#include <chrono>
+
+namespace
+{
+	using std::cout;
+	using std::endl;
+	using std::chrono::high_resolution_clock;
+}
 
 template <typename T>
 void insertion_sort(T elements[], const int left_bound, const int right_bound)
@@ -86,35 +94,54 @@ void binary_insertion_sort(T elements[], const int left_bound, const int right_b
 }
 
 template <typename T>
-void merge(T elements[], const int left_bound, const int mid, const int right_bound)
+void merge(T elements[], const int left_bound, const int mid, const int right_bound, bool switch_sort)
 {
-	insertion_sort(elements, left_bound, mid);
-	insertion_sort(elements, mid, right_bound);
 
-	const int size = right_bound - left_bound;
-	T copy[size] = {};
-	std::copy_n(elements[left_bound], size, copy);
+	if (switch_sort)
+	{
+		insertion_sort(elements, left_bound, mid);
+		insertion_sort(elements, mid, right_bound);
+	}
+	else
+	{
+		binary_insertion_sort(elements, left_bound, mid);
+		binary_insertion_sort(elements, mid, right_bound);
+	}
+
+	std::inplace_merge(&elements[left_bound], &elements[mid], &elements[right_bound]);
 }
 
 template <typename T>
-void merge_sort(T elements[], const int left_bound, const int right_bound, const int sub_size)
+void merge_sort(T elements[], const int left_bound, const int right_bound, const int sub_size, bool switch_sort)
 {
 	if (right_bound - left_bound > sub_size)
 	{
 		unsigned int mid = (left_bound + right_bound) / 2;
 
-		merge_sort(elements, left_bound, mid, sub_size);
+		merge_sort(elements, left_bound, mid, sub_size, switch_sort);
 
-		merge_sort(elements, mid, right_bound, sub_size);
+		merge_sort(elements, mid, right_bound, sub_size, switch_sort);
 
-		merge(elements, left_bound, mid, right_bound);
+		merge(elements, left_bound, mid, right_bound, switch_sort);
 	}
+}
+
+template <typename T>
+void dual_merge_sort(T elements[], const int left_bound, const int right_bound, const int sub_size)
+{
+	unsigned int mid = (left_bound + right_bound) / 2;
+
+	merge_sort(elements, left_bound, mid, sub_size, false);
+
+	merge_sort(elements, mid, right_bound, sub_size, true);
+
+	merge(elements, left_bound, mid, right_bound, false);
 }
 
 int main()
 {
 	int values[] = { 5, 3, 9, 2, 5, 11, 7, 4};
-	merge_sort(values, 0, 8, 2);
+	dual_merge_sort(values, 0, 8, 1);
 	//long values[] = {7, 3, 4, 8, 1};
 	//int values[] = {2, 3, 4, 7, 9, 23, 25, 36, 47, 55, 56, 58, 64, 77, 81};
 	//int values[] = {77, 81, 9, 7, 4, 23, 25, 36, 47, 55, 64, 56, 3, 77, 81, 27};

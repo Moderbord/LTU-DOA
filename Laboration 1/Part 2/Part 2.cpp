@@ -100,7 +100,7 @@ int main()
 	duration<double> time_span;
 
 	/// Measuring average operation time (testing)
-	for (int i = 0; i < 1001; i++)
+	/*for (int i = 0; i < 1001; i++)
 	{
 		t1 = high_resolution_clock::now();
 		is_stack_palindrome(word);
@@ -116,24 +116,26 @@ int main()
 	}
 
 	cout << "Stack palindrome took on average " << stack_count.get_average_ms() << " milliseconds.\n\n";
-	cout << "Stack and queue palindrome took on average " << stack_queue_count.get_average_ms() << " milliseconds.\n\n";
+	cout << "Stack and queue palindrome took on average " << stack_queue_count.get_average_ms() << " milliseconds.\n\n";*/
 
 	/// Manual mode (interactive)
-	//while (true)
-	//{
-	//	cout << "Enter word\n>> ";
-	//	std::getline(std::cin, word);
+	while (true)
+	{
+		cout << "Enter word\n>> ";
+		std::getline(std::cin, word);
 
-	//	t1 = high_resolution_clock::now();
-	//	cout << (is_stack_palindrome(word) ? "Yes" : "No") << "\n";
-	//	t2 = high_resolution_clock::now();
-	//	time_span = std::chrono::duration_cast<duration<double>>(t2 - t1);
-	//	cout << "Stack palindrome took me " << time_span.count() * 1000 << " milliseconds.\n\n";
 
-	//	t1 = high_resolution_clock::now();
-	//	cout << (is_stack_queue_palindrome(word) ? "Yes" : "No") << "\n";
-	//	t2 = high_resolution_clock::now();
-	//	time_span = std::chrono::duration_cast<duration<double>>(t2 - t1);
-	//	cout << "Stack and queue palindrome took me " << time_span.count() * 1000 << " milliseconds.\n\n";
-	//}
+
+		t1 = high_resolution_clock::now();
+		cout << (is_stack_queue_palindrome(word) ? "Yes" : "No") << "\n";
+		t2 = high_resolution_clock::now();
+		time_span = std::chrono::duration_cast<duration<double>>(t2 - t1);
+		cout << "Stack and queue palindrome took me " << time_span.count() * 1000 << " milliseconds.\n\n";
+
+		t1 = high_resolution_clock::now();
+		cout << (is_stack_palindrome(word) ? "Yes" : "No") << "\n";
+		t2 = high_resolution_clock::now();
+		time_span = std::chrono::duration_cast<duration<double>>(t2 - t1);
+		cout << "Stack palindrome took me " << time_span.count() * 1000 << " milliseconds.\n\n";
+	}
 }
