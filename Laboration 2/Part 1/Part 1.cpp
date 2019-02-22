@@ -3,10 +3,10 @@
 #include <algorithm>
 
 template <typename T>
-void insertion_sort(T elements[], const int num_elements)
+void insertion_sort(T elements[], const int left_bound, const int right_bound)
 {
 	// Iterates after first element
-	for (int i = 1; i < num_elements; i++)						
+	for (int i = left_bound + 1; i < right_bound; i++)						
 	{
 		// Current element that is being sorted
 		T current = elements[i];									
@@ -14,7 +14,7 @@ void insertion_sort(T elements[], const int num_elements)
 		int pivot = i - 1;
 
 		// Right-shifts elements that is larger than current
-		while (pivot >= 0 && current < elements[pivot])				
+		while (pivot >= left_bound && current < elements[pivot])				
 		{
 			elements[pivot + 1] = elements[pivot];
 			pivot--;
@@ -93,20 +93,27 @@ void merge(T elements[], const int left_bound, const int right_bound)
 }
 
 template <typename T>
-void merge_sort(T elements[], const int num_elements, const int sub_size)
+void merge_sort(T elements[], const int left_bound, const int right_bound, const int sub_size)
 {
+	if (right_bound - left_bound < sub_size)
+	{
+		unsigned int mid = (left_bound + right_bound) / 2;
 
+		merge_sort(elements, left_bound, mid, sub_size);
+
+		merge_sort(elements, mid + 1, right_bound, sub_size);
+	}
 }
 
 int main()
 {
-	int values[] = { 5, 3, 5, 2, 9, 11 };
-	merge(values, )
+	int values[] = { 5, 3, 5, 2, 9, 11, 7, 4};
+	//merge(values, 0, 8);
 	//long values[] = {7, 3, 4, 8, 1};
 	//int values[] = {2, 3, 4, 7, 9, 23, 25, 36, 47, 55, 56, 58, 64, 77, 81};
 	//int values[] = {77, 81, 9, 7, 4, 23, 25, 36, 47, 55, 64, 56, 3, 77, 81, 27};
 	//binary_search(values, 0, 15, 100);
-	//insertion_sort(values, 5);
+	insertion_sort(values, 2, 6);
 	//binary_insertion_sort(values, 16);
 	
 }
