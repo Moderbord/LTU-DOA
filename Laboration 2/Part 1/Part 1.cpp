@@ -8,6 +8,7 @@ namespace
 	using std::cout;
 	using std::endl;
 	using std::chrono::high_resolution_clock;
+	using std::chrono::duration;
 }
 
 template <typename T>
@@ -50,7 +51,7 @@ int binary_search(T elements[], const int left_bound, const int right_bound, T t
 		// Middle element is larger than target element, searches left sublist
 		if (elements[middle_index] > target_element)
 		{
-			return binary_search(elements, left_bound, middle_index - 1, target_element);
+			return binary_search(elements, left_bound, middle_index, target_element);
 		}
 
 		// Middle element is smaller than target element, searches right sublist
@@ -126,27 +127,52 @@ void merge_sort(T elements[], const int left_bound, const int right_bound, const
 	}
 }
 
-template <typename T>
-void dual_merge_sort(T elements[], const int left_bound, const int right_bound, const int sub_size)
+// Class for ocunting average operation time
+class Count
 {
+private:
+	double sum = 0;
+	double num = 0;
+public:
+	void add(double d)
+	{
+		sum += d;
+		num++;
+	}
+	double get_average_ms()
+	{
+		return sum * 1000 / num;
+	}
+};
+
+template <typename T>
+void dual_merge_sort(T elements[], const int left_bound, const int right_bound, const int sub_size, Count &aSort, Count &bSort)
+{
+	high_resolution_clock::time_point t1 = high_resolution_clock::now();
+	high_resolution_clock::time_point t2 = high_resolution_clock::now();
+
 	unsigned int mid = (left_bound + right_bound) / 2;
 
-	merge_sort(elements, left_bound, mid, sub_size, false);
+	t1 = high_resolution_clock::now();
+	merge_sort(elements, left_bound, mid, sub_size, true);
+	t2 = high_resolution_clock::now();
+	aSort.add(std::chrono::duration_cast<duration<double>>(t2 - t1).count());
 
-	merge_sort(elements, mid, right_bound, sub_size, true);
+	t1 = high_resolution_clock::now();
+	merge_sort(elements, mid, right_bound, sub_size, false);
+	t2 = high_resolution_clock::now();
+	bSort.add(std::chrono::duration_cast<duration<double>>(t2 - t1).count());
 
 	merge(elements, left_bound, mid, right_bound, false);
 }
 
 int main()
 {
-	int values[] = { 5, 3, 9, 2, 5, 11, 7, 4};
-	dual_merge_sort(values, 0, 8, 1);
-	//long values[] = {7, 3, 4, 8, 1};
-	//int values[] = {2, 3, 4, 7, 9, 23, 25, 36, 47, 55, 56, 58, 64, 77, 81};
-	//int values[] = {77, 81, 9, 7, 4, 23, 25, 36, 47, 55, 64, 56, 3, 77, 81, 27};
-	//binary_search(values, 0, 15, 100);
-	//insertion_sort(values, 2, 6);
-	//binary_insertion_sort(values, 2,6);
+	Count aSort;
+	Count bSort;
+
+	//int values[] = { 5, 3, 9, 2, 5, 11, 7, 4};
+	int values[] = { 5, 11, 7, 4,  5, 3, 9, 2};
+	dual_merge_sort(values, 0, 8, 2, aSort, bSort);
 	
 }
