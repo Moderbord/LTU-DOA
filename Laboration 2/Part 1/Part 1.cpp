@@ -5,7 +5,7 @@
 template <typename T>
 void insertion_sort(T elements[], const int left_bound, const int right_bound)
 {
-	// Iterates after first element
+	// Iterates after left bound element
 	for (int i = left_bound + 1; i < right_bound; i++)						
 	{
 		// Current element that is being sorted
@@ -58,7 +58,7 @@ int binary_search(T elements[], const int left_bound, const int right_bound, T t
 template <typename T>
 void binary_insertion_sort(T elements[], const int left_bound, const int right_bound)
 {
-	// Iterates after first element
+	// Iterates after left bound element
 	for (int i = left_bound + 1; i < right_bound; i++)						
 	{
 		// Current element that is being sorted
@@ -86,34 +86,40 @@ void binary_insertion_sort(T elements[], const int left_bound, const int right_b
 }
 
 template <typename T>
-void merge(T elements[], const int left_bound, const int right_bound)
+void merge(T elements[], const int left_bound, const int mid, const int right_bound)
 {
-	unsigned int mid = (left_bound + right_bound) / 2;
-	
+	insertion_sort(elements, left_bound, mid);
+	insertion_sort(elements, mid, right_bound);
+
+	const int size = right_bound - left_bound;
+	T copy[size] = {};
+	std::copy_n(elements[left_bound], size, copy);
 }
 
 template <typename T>
 void merge_sort(T elements[], const int left_bound, const int right_bound, const int sub_size)
 {
-	if (right_bound - left_bound < sub_size)
+	if (right_bound - left_bound > sub_size)
 	{
 		unsigned int mid = (left_bound + right_bound) / 2;
 
 		merge_sort(elements, left_bound, mid, sub_size);
 
-		merge_sort(elements, mid + 1, right_bound, sub_size);
+		merge_sort(elements, mid, right_bound, sub_size);
+
+		merge(elements, left_bound, mid, right_bound);
 	}
 }
 
 int main()
 {
-	int values[] = { 5, 3, 5, 2, 9, 11, 7, 4};
-	//merge(values, 0, 8);
+	int values[] = { 5, 3, 9, 2, 5, 11, 7, 4};
+	merge_sort(values, 0, 8, 2);
 	//long values[] = {7, 3, 4, 8, 1};
 	//int values[] = {2, 3, 4, 7, 9, 23, 25, 36, 47, 55, 56, 58, 64, 77, 81};
 	//int values[] = {77, 81, 9, 7, 4, 23, 25, 36, 47, 55, 64, 56, 3, 77, 81, 27};
 	//binary_search(values, 0, 15, 100);
 	//insertion_sort(values, 2, 6);
-	binary_insertion_sort(values, 2,6);
+	//binary_insertion_sort(values, 2,6);
 	
 }
