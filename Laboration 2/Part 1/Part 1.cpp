@@ -2,6 +2,7 @@
 #include <iostream>
 #include <algorithm>
 #include <chrono>
+#include <random>
 
 namespace
 {
@@ -95,10 +96,10 @@ void binary_insertion_sort(T elements[], const int left_bound, const int right_b
 }
 
 template <typename T>
-void merge(T elements[], const int left_bound, const int mid, const int right_bound, bool switch_sort)
+void merge(T elements[], const int left_bound, const int mid, const int right_bound, bool sort_mode)
 {
-
-	if (switch_sort)
+	// Uses either insertion sort or binary insertion sort on both sublists
+	if (sort_mode)
 	{
 		insertion_sort(elements, left_bound, mid);
 		insertion_sort(elements, mid, right_bound);
@@ -108,27 +109,28 @@ void merge(T elements[], const int left_bound, const int mid, const int right_bo
 		binary_insertion_sort(elements, left_bound, mid);
 		binary_insertion_sort(elements, mid, right_bound);
 	}
-
+	// Merges the two sublist. Takes up to 2(N * log(N)) comparison and element swaps
 	std::inplace_merge(&elements[left_bound], &elements[mid], &elements[right_bound]);
 }
 
 template <typename T>
-void merge_sort(T elements[], const int left_bound, const int right_bound, const int sub_size, bool switch_sort)
+void merge_sort(T elements[], const int left_bound, const int right_bound, const int sub_size, bool sort_mode)
 {
+	// If the list contains more elements than the specified sub size
 	if (right_bound - left_bound > sub_size)
 	{
+		// Middle index divider
 		unsigned int mid = (left_bound + right_bound) / 2;
-
-		merge_sort(elements, left_bound, mid, sub_size, switch_sort);
-
-		merge_sort(elements, mid, right_bound, sub_size, switch_sort);
-
-		merge(elements, left_bound, mid, right_bound, switch_sort);
+		// Recursively calls function on both sides on the list using middle divider, thus creating sublists
+		merge_sort(elements, left_bound, mid, sub_size, sort_mode);
+		merge_sort(elements, mid, right_bound, sub_size, sort_mode);
+		// Sorts and merges sublists
+		merge(elements, left_bound, mid, right_bound, sort_mode);
 	}
 }
 
-// Class for ocunting average operation time
-class Count
+// Class for measureing average operation time
+class Counter
 {
 private:
 	double sum = 0;
@@ -146,33 +148,56 @@ public:
 };
 
 template <typename T>
-void dual_merge_sort(T elements[], const int left_bound, const int right_bound, const int sub_size, Count &aSort, Count &bSort)
+void dual_merge_sort(T elements[], const int left_bound, const int right_bound, const int sub_size, Counter &aSort, Counter &bSort)
 {
-	high_resolution_clock::time_point t1 = high_resolution_clock::now();
-	high_resolution_clock::time_point t2 = high_resolution_clock::now();
+	bool mode_insertion_sort = true;
+	bool mode_binary_insertion_sort = false;
+
+	high_resolution_clock::time_point t1;
+	high_resolution_clock::time_point t2;
 
 	unsigned int mid = (left_bound + right_bound) / 2;
 
+	// Left block of the merge sort function, uses insertion sort 
 	t1 = high_resolution_clock::now();
-	merge_sort(elements, left_bound, mid, sub_size, true);
+	merge_sort(elements, left_bound, mid, sub_size, mode_insertion_sort);
 	t2 = high_resolution_clock::now();
 	aSort.add(std::chrono::duration_cast<duration<double>>(t2 - t1).count());
 
+	// Right block of the merge sort function, uses binary insertion sort
 	t1 = high_resolution_clock::now();
-	merge_sort(elements, mid, right_bound, sub_size, false);
+	merge_sort(elements, mid, right_bound, sub_size, mode_binary_insertion_sort);
 	t2 = high_resolution_clock::now();
 	bSort.add(std::chrono::duration_cast<duration<double>>(t2 - t1).count());
 
-	merge(elements, left_bound, mid, right_bound, false);
+	// Final merge
+	merge(elements, left_bound, mid, right_bound, mode_insertion_sort);
 }
 
 int main()
 {
-	Count aSort;
-	Count bSort;
+	std::random_device rand;
+	Counter aSort;
+	Counter bSort;
+	const unsigned int num_elements = 1000;
+	const unsigned int iterations = 1000;
 
 	//int values[] = { 5, 3, 9, 2, 5, 11, 7, 4};
-	int values[] = { 5, 11, 7, 4,  5, 3, 9, 2};
-	dual_merge_sort(values, 0, 8, 2, aSort, bSort);
+	int values[num_elements] = {};
 	
+	for (int k = 0; k < 50; k++)
+	{ 
+		for (int j = 0; j < iterations; j++)
+		{
+			for (int i = 0; i < num_elements; i++)
+			{
+				int num = rand() % 20;
+				values[i] = num;
+			}
+			dual_merge_sort(values, 0, num_elements, 2, aSort, bSort);
+		}
+
+		cout << "Insertion sort: " << aSort.get_average_ms() << " ms. \tBinary Insertion Sort: " << bSort.get_average_ms() << endl;
+	}
+
 }
