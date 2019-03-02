@@ -176,28 +176,35 @@ void dual_merge_sort(T elements[], const int left_bound, const int right_bound, 
 
 int main()
 {
-	std::random_device rand;
-	Counter aSort;
-	Counter bSort;
-	const unsigned int num_elements = 1000;
-	const unsigned int iterations = 1000;
+	/// Test variables
+	const unsigned int num_elements = 10000;
+	const unsigned int num_generations = 1;
+	//const unsigned int split_values[] = { 2, 4, 8, 16, 32, 64, 128, 254, 3, 5, 10, 15, 20, 30, 40, 50};
+	const unsigned int split_values[] = { 500 };
+	const unsigned int num_tests = 5;
 
-	//int values[] = { 5, 3, 9, 2, 5, 11, 7, 4};
 	int values[num_elements] = {};
+	std::random_device rand;
 	
-	for (int k = 0; k < 50; k++)
-	{ 
-		for (int j = 0; j < iterations; j++)
-		{
-			for (int i = 0; i < num_elements; i++)
-			{
-				int num = rand() % 20;
-				values[i] = num;
+	for (const int split_size : split_values)
+	{
+		for (int k = 0; k < num_tests; k++)
+		{ 
+			Counter aSort;
+			Counter bSort;
+			// Number of times a list is generated and sorted
+			for (int j = 0; j < num_generations; j++)
+			{	// Generates a number of elements to the list
+				for (int i = 0; i < num_elements; i++)
+				{
+					int num = rand() % 5000;
+					values[i] = num;
+				}
+				// Sorts list
+				dual_merge_sort(values, 0, num_elements, split_size, aSort, bSort);
 			}
-			dual_merge_sort(values, 0, num_elements, 2, aSort, bSort);
+			cout << "Split size: " << split_size << "\t" << "Insertion sort: " << aSort.get_average_ms() << " ms. \tBinary Insertion Sort: " << bSort.get_average_ms() << endl;
 		}
-
-		cout << "Insertion sort: " << aSort.get_average_ms() << " ms. \tBinary Insertion Sort: " << bSort.get_average_ms() << endl;
+		cout << endl;
 	}
-
 }
