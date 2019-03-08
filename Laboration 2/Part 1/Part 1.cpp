@@ -177,11 +177,10 @@ void dual_merge_sort(T elements[], const int left_bound, const int right_bound, 
 int main()
 {
 	/// Test variables
-	const unsigned int num_elements = 10000;
-	const unsigned int num_generations = 1;
-	//const unsigned int split_values[] = { 2, 4, 8, 16, 32, 64, 128, 254, 3, 5, 10, 15, 20, 30, 40, 50};
-	const unsigned int split_values[] = { 500 };
-	const unsigned int num_tests = 5;
+	const unsigned int num_elements = 100000;
+	const unsigned int num_generations = 20;
+	const unsigned int split_values[] = { 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096};
+	const unsigned int num_tests = 1;
 
 	int values[num_elements] = {};
 	std::random_device rand;
@@ -203,7 +202,7 @@ int main()
 				// Sorts list
 				dual_merge_sort(values, 0, num_elements, split_size, aSort, bSort);
 			}
-			cout << "Split size: " << split_size << "\t" << "Insertion sort: " << aSort.get_average_ms() << " ms. \tBinary Insertion Sort: " << bSort.get_average_ms() << endl;
+			cout << "Split size: " << split_size << "\t" << "Insertion sort: " << aSort.get_average_ms() << " ms. \tBinary Insertion Sort: " << bSort.get_average_ms() << " ms.\n";
 		}
 		cout << endl;
 	}
