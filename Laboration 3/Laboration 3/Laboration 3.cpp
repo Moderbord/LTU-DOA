@@ -10,24 +10,28 @@ namespace {
 	using std::chrono::duration;
 }
 
+
+// Recursive function which takes an array, index of left- and rightmost element, and two references to integer variables
 void maximized_indices(int arr[], int left_bound, int right_bound, int &min, int &max)
 {
-
+	// Base condition, method will call itself recursively if array contains more than 1 element
 	if (right_bound - left_bound > 0)
 	{
+		// Middle index
 		int mid = (right_bound + left_bound) / 2;
-
+		// Call method on left array
 		maximized_indices(arr, left_bound, mid, min, max);
-
+		// Call methid on right array
 		maximized_indices(arr, mid + 1, right_bound, min, max);
-
 	}
 
+	// Comparison if the value is smaller than the current smallest element, if so -> swap
 	min = min < arr[left_bound] ? min : arr[left_bound];
+	// Comparison if the value is larger than the current largest element, if so -> swap
 	max = max > arr[left_bound] ? max : arr[left_bound];
 }
 
-// Class for measureing average operation time
+// Class to measure average operation time
 class Counter
 {
 private:
@@ -47,6 +51,7 @@ public:
 
 int main()
 {
+	// Test variables
 	const unsigned int num_elements_array_one = 1000;
 	const unsigned int num_elements_array_two = 10000;
 	const unsigned int num_elements_array_three = 100000;
@@ -113,5 +118,4 @@ int main()
 	cout << "1 000 elements in array, average microseconds: " << c1.get_average_ms() << "\n";
 	cout << "10 000 elements in array, average microseconds: " << c2.get_average_ms() << "\n";
 	cout << "100 000 elements in array, average microseconds: " << c3.get_average_ms() << "\n";
-
 }
